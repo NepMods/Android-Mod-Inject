@@ -235,25 +235,25 @@ void *CreateServer(void *) {
                         LOGD(OBFUSCATE("Selected item 3"));
                         break;
                     }
-                    else if(request.Mode == f::f5) {
-                        int value = request.value;
-                        if (instanceBtn != NULL)
-                        AddMoneyExample(instanceBtn, 999999);
-
-                    }
-                    else if(request.Mode == f::f6) {
-                        featureHookToggle = request.boolean;
-                    }
-                    else if(request.Mode == f::f7) {
-                        level = request.value;
-
-                    }
-                    server.sendX((void*)& response, sizeof(response));
                 }
+                else if(request.Mode == f::f5) {
+                    int value = request.value;
+                    if (instanceBtn != NULL)
+                    AddMoneyExample(instanceBtn, 999999);
+
+                }
+                else if(request.Mode == f::f6) {
+                    featureHookToggle = request.boolean;
+                }
+                else if(request.Mode == f::f7) {
+                    level = request.value;
+
+                }
+                server.sendX((void*)& response, sizeof(response));
             }
         }
-        return nullptr;
     }
+    return nullptr;
 }
 
 
