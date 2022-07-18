@@ -31,3 +31,10 @@ keep updating this project.
 
 and I am begging you, if you dont have basic knowladge about c++, java and 
 other small things, learn them first and Start modding
+
+
+
+
+
+
+Remember To Add <a href = "https://github.com/NepMods/Android-Mod-Inject/blob/master/libinject.so">LibLinject.so</a> After Building
