@@ -31,7 +31,7 @@ enum Mode {
 
 struct Request {
     int Mode;
-    bool m_IsOn;
+    bool boolean;
     int value;
     int screenWidth;
     int screenHeight;
