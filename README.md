@@ -25,7 +25,7 @@ all is Same Like Lgl Android-ModMenu 2.9
 in fact, it Android-modmenu 2.9 was converted into injector.
 
 
-Its No clean project. If You can use, and Improove, you can do.i will
+Its Not clean project. If You can use, and Improove, you can do.i will
 keep updating this project.
 
 
