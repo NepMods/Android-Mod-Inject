@@ -38,3 +38,11 @@ other small things, learn them first and Start modding
 
 
 Remember To Add <a href = "https://github.com/NepMods/Android-Mod-Inject/blob/master/libinject.so">LibLinject.so</a> After Building
+
+
+
+
+Change Game Package Name At FloatingModMenu
+
+
+Ita Currently com.noodlecake.altosadventure
