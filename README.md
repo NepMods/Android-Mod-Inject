@@ -16,10 +16,7 @@ Android Mod Injector Is Mod Menu Injector For Rooted Device & Virtual Device. Ma
 This Project is Easy To use. but Yu need some experience with modding.
 </P>
 <H3> Step 1: Targeting Game </h3>
-<P> You Need To Target The Game By Entering Game's Package Name On 
-```
-git status
-git add
-git commit
-```
- And Find `targetPackage` variable. Then, Replace with Your Game Package.
+You Need To Target The Game By Entering Game's Package Name On 
+<Code>FloatingModMenuServices.java</code>
+ And Find <code>targetPackage</code> variable. Then, Replace with Your Game Package.
+
