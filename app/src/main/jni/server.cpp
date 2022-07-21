@@ -159,16 +159,14 @@ void *CreateServer(void *) {
                 Response response {};
                 if (request.Mode == Mode::InitMode) {
                     response.Success = true;
-                }
-                else if (request.Mode == Mode::HackMode) {
+                } else if (request.Mode == Mode::HackMode) {
 
                     response.Success = true;
                 } else if (request.Mode == Mode::EspMode) {
 
                     createDataList(response);
                     response.Success = true;
-                }
-                else if (request.Mode == f::f1) {
+                } else if (request.Mode == f::f1) {
 
                     feature2 = request.boolean;
 
@@ -186,68 +184,64 @@ void *CreateServer(void *) {
                         hexPatches.GodMode2.Restore();
                         //LOGI(OBFUSCATE("Off"));
                     }
-                }
-
-                else if(request.Mode == f::f2) {
+                    response.Success = true;
+                } else if (request.Mode == f::f2) {
                     sliderValue = request.value;
-                }
-                else if(request.Mode == f::f3) {
+                    response.Success = true;
+                } else if (request.Mode == f::f3) {
                     int value = request.value;
                     switch (value) {
                         //For noobies
                         case 0:
-                        hexPatches.SliderExample = MemoryPatch::createWithHex(
-                            targetLibName, string2Offset(
-                                OBFUSCATE("0x100000")),
-                            OBFUSCATE(
-                                "00 00 A0 E3 1E FF 2F E1"));
-                        hexPatches.SliderExample.Modify();
-                        break;
+                            hexPatches.SliderExample = MemoryPatch::createWithHex(
+                                targetLibName, string2Offset(
+                                    OBFUSCATE("0x100000")),
+                                OBFUSCATE(
+                                    "00 00 A0 E3 1E FF 2F E1"));
+                            hexPatches.SliderExample.Modify();
+                            break;
                         case 1:
-                        hexPatches.SliderExample = MemoryPatch::createWithHex(
-                            targetLibName, string2Offset(
-                                OBFUSCATE("0x100000")),
-                            OBFUSCATE(
-                                "01 00 A0 E3 1E FF 2F E1"));
-                        hexPatches.SliderExample.Modify();
-                        break;
+                            hexPatches.SliderExample = MemoryPatch::createWithHex(
+                                targetLibName, string2Offset(
+                                    OBFUSCATE("0x100000")),
+                                OBFUSCATE("01 00 A0 E3 1E FF 2F E1"));
+                            hexPatches.SliderExample.Modify();
+                            break;
                         case 2:
-                        hexPatches.SliderExample = MemoryPatch::createWithHex(
-                            targetLibName,
-                            string2Offset(
-                                OBFUSCATE("0x100000")),
-                            OBFUSCATE(
-                                "02 00 A0 E3 1E FF 2F E1"));
-                        hexPatches.SliderExample.Modify();
-                        break;
+                            hexPatches.SliderExample = MemoryPatch::createWithHex(
+                                targetLibName,
+                                string2Offset(
+                                    OBFUSCATE("0x100000")),
+                                OBFUSCATE(
+                                    "02 00 A0 E3 1E FF 2F E1"));
+                            hexPatches.SliderExample.Modify();
+                            break;
                     }
-                }
-                else if(request.Mode == f::f4) {
+                    response.Success = true;
+                } else if (request.Mode == f::f4) {
                     int value = request.value;
                     switch (value) {
                         case 0:
-                        LOGD(OBFUSCATE("Selected item 1"));
-                        break;
+                            LOGD(OBFUSCATE("Selected item 1"));
+                            break;
                         case 1:
-                        LOGD(OBFUSCATE("Selected item 2"));
-                        break;
+                            LOGD(OBFUSCATE("Selected item 2"));
+                            break;
                         case 2:
-                        LOGD(OBFUSCATE("Selected item 3"));
-                        break;
+                            LOGD(OBFUSCATE("Selected item 3"));
+                            break;
                     }
-                }
-                else if(request.Mode == f::f5) {
+                    response.Success = true;
+                } else if (request.Mode == f::f5) {
                     int value = request.value;
-                    if (instanceBtn != NULL)
-                    AddMoneyExample(instanceBtn, 999999);
 
-                }
-                else if(request.Mode == f::f6) {
+                    response.Success = true;
+                } else if (request.Mode == f::f6) {
                     featureHookToggle = request.boolean;
-                }
-                else if(request.Mode == f::f7) {
+                    response.Success = true;
+                } else if (request.Mode == f::f7) {
                     level = request.value;
-
+                    response.Success = true;
                 }
                 server.sendX((void*)& response, sizeof(response));
             }
@@ -295,7 +289,7 @@ void* Thread (void *) {
     AddMoneyExample = (void(*)(void *, int))getAbsoluteAddress(targetLibName, 0x123456);
 
     #else //To compile this code for armv7 lib only.
-    // New way to patch hex via KittyMemory without need to specify len. Spaces or without spaces are fine
+        // New way to patch hex via KittyMemory without need to specify len. Spaces or without spaces are fine
     // ARMv7 assembly example
     // MOV R0, #0x0 = 00 00 A0 E3
     // BX LR = 1E FF 2F E1
