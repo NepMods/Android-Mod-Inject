@@ -93,7 +93,7 @@ You can Simply Make Mod Like LGL Android Mod Menu 2.9
 
 <H3>Credits</h3>
 Making Project: Nepmods (https://GitHub.com/nepmods)<br>
-*Inject Lib Framework : Chainfire/evilsocket : https://github.com/Chainfire/inject-hook-cflumen
-*Mod Template : LGLTeam : https://github.com/LGLTeam/Android-Mod-Menu
-*Socket: Kmods : https://github.com/kp7742
-*Help To Inject Fix On Root/Magisk: Mr Any Gamer
+*Inject Lib Framework : Chainfire/evilsocket : https://github.com/Chainfire/inject-hook-cflumen<br>
+*Mod Template : LGLTeam : https://github.com/LGLTeam/Android-Mod-Menu<br>
+*Socket: Kmods : https://github.com/kp7742<br>
+*Help To Inject Fix On Root/Magisk: Mr Any Gamer<br>
