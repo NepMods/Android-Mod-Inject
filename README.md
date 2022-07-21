@@ -20,3 +20,6 @@ You Need To Target The Game By Entering Game's Package Name On
 <Code>FloatingModMenuServices.java</code>
  And Find <code>targetPackage</code> variable. Then, Replace with Your Game Package.
 
+>If You Change Lib Name in Android.ml, also Change here
+
+![image1](https://i.ibb.co/fX3xWqG/Screenshot-20220721-191944.png)
