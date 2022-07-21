@@ -25,6 +25,25 @@ You Need To Target The Game By Entering Game's Package Name On
 ![image1](https://i.ibb.co/fX3xWqG/Screenshot-20220721-191944.png)
 
 
-<H3> Step 2: Targeting Lib <h3>
+<H3> Step 2: Targeting Lib </h3>
 You need to Target A Library For Hacking Or Making Mod, You can do it on <code>Server.cpp</code>
 
+
+![img2](https://i.ibb.co/8NXSW43/Screenshot-20220721-192853.png)
+
+
+<H3>Adding New Feature</h3>
+YOU NEED TO ADD NEW FEATURE TO MAKE MODS. 
+To do so, <br>
+First:
+<H4> Creating New Feature</h4>
+YOU CAN ADD NEW FEATURE TO <code>Main.cpp</code>file.
+
+
+![img3](https://i.postimg.cc/0y5TfJqY/Screenshot-20220721-194316.png)
+
+<H4>Creating New Request Id</h4>
+You need To Create New Feature Id for Sending / Receiving The Data using Socket.
+<Br>For that:
+
+![img4](https://pasteboard.co/gD4k4bLyw9fb.png)
