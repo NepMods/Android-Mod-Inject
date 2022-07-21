@@ -1,19 +1,19 @@
-#include < list >
-#include < vector >
-#include < string.h >
-#include < pthread.h >
-#include < cstring >
-#include < jni.h >
-#include < unistd.h >
-#include < fstream >
-#include < iostream >
-#include < dlfcn.h >
+#include <list>
+#include <vector>
+#include <string.h>
+#include <pthread.h>
+#include <cstring>
+#include <jni.h>
+#include <unistd.h>
+#include <fstream>
+#include <iostream>
+#include <dlfcn.h>
 #include "Includes/Logger.h"
 #include "Includes/obfuscate.h"
 #include "Includes/Utils.h"
 #include "Menu.h"
-#include < SOCKET/client.h >
-#include < SOCKET/IncludeClient.h >
+#include <SOCKET/client.h>
+#include <SOCKET/IncludeClient.h>
 ESP espOverlay;
 
 bool feature1, feature2, featureHookToggle, Health;
@@ -104,7 +104,7 @@ extern "C" {
             env->NewStringUTF(""));
 
         for (int i = 0; i < Total_Feature; i++)
-            env->SetObjectArrayElement(ret, i, env->NewStringUTF(features[i]));
+        env->SetObjectArrayElement(ret, i, env->NewStringUTF(features[i]));
 
         pthread_t ptid;
         pthread_create(&ptid, NULL, antiLeech, NULL);
@@ -125,77 +125,77 @@ extern "C" {
 
         switch (featNum) {
             case 0:
-                feature2 = boolean;
-                Send(f::f1, feature2);
+            feature2 = boolean;
+            Send(f::f1, feature2);
 
-                break;
+            break;
             case 100:
-                break;
+            break;
             case 110:
-                break;
+            break;
             case 1:
-                if (value >= 1) {
-                    sliderValue = value;
-                }
-                Send(f::f2, sliderValue);
-                break;
-            case 2:
-                Send(f::f3, value);
-                case 3:
-                    Send(f::f4, value);
-                    case 4:
-                        Send(f::f5, value);
-                        // MakeToast(env, obj, OBFUSCATE("Button pressed"), Toast::LENGTH_SHORT);
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        featureHookToggle = boolean;
-                        Send(f::f6, featureHookToggle);
-                        break;
-                    case 7:
-                        level = value;
-                        Send(f::f7, value);
-                        break;
-                    case 8:
-                        //MakeToast(env, obj, TextInput, Toast::LENGTH_SHORT);
-                        break;
-                    case 9:
-                        break;
+            if (value >= 1) {
+                sliderValue = value;
             }
+            Send(f::f2, sliderValue);
+            break;
+            case 2:
+            Send(f::f3, value);
+            case 3:
+            Send(f::f4, value);
+            case 4:
+            Send(f::f5, value);
+            // MakeToast(env, obj, OBFUSCATE("Button pressed"), Toast::LENGTH_SHORT);
+            break;
+            case 5:
+            break;
+            case 6:
+            featureHookToggle = boolean;
+            Send(f::f6, featureHookToggle);
+            break;
+            case 7:
+            level = value;
+            Send(f::f7, value);
+            break;
+            case 8:
+            //MakeToast(env, obj, TextInput, Toast::LENGTH_SHORT);
+            break;
+            case 9:
+            break;
         }
     }
-    void DrawESP(ESP esp, int screenWidth, int screenHeight) {
-        float mScale = (float) screenHeight / (float) 1080;
-        esp.DrawText(Color::Yellow(), "Nepmods V1.90", Vector2(screenWidth / 2, screenHeight/1.2), 17);
+}
+void DrawESP(ESP esp, int screenWidth, int screenHeight) {
+    float mScale = (float) screenHeight / (float) 1080;
+    esp.DrawText(Color::Yellow(), "Nepmods V1.90", Vector2(screenWidth / 2, screenHeight/1.2), 17);
+}
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_uk_lgl_modmenu_FloatingModMenuService_DrawOn(JNIEnv *env, jclass type, jobject espView, jobject canvas) {
+    espOverlay = ESP(env, espView, canvas);
+    if (espOverlay.isValid()) {
+        DrawESP(espOverlay, espOverlay.getWidth(), espOverlay.getHeight());
     }
+}
 
-
-    extern "C"
-    JNIEXPORT void JNICALL
-    Java_uk_lgl_modmenu_FloatingModMenuService_DrawOn(JNIEnv *env, jclass type, jobject espView, jobject canvas) {
-        espOverlay = ESP(env, espView, canvas);
-        if (espOverlay.isValid()) {
-            DrawESP(espOverlay, espOverlay.getWidth(), espOverlay.getHeight());
-        }
+extern "C" {
+    JNIEXPORT jboolean JNICALL
+    Java_uk_lgl_modmenu_FloatingModMenuService_IsConnected(JNIEnv *env, jobject thiz) {
+        return client.connected;
     }
-
-    extern "C" {
-        JNIEXPORT jboolean JNICALL
-        Java_uk_lgl_modmenu_FloatingModMenuService_IsConnected(JNIEnv *env, jobject thiz) {
-            return client.connected;
-        }
-    }
+}
 
 
-    extern "C"
-    JNIEXPORT void JNICALL
-    Java_uk_lgl_modmenu_FloatingModMenuService_Init(JNIEnv *env, jobject thiz) {
-        startClient();
-    }
+extern "C"
+JNIEXPORT void JNICALL
+Java_uk_lgl_modmenu_FloatingModMenuService_Init(JNIEnv *env, jobject thiz) {
+    startClient();
+}
 
-    extern "C"
-    JNIEXPORT void JNICALL
-    Java_uk_lgl_modmenu_FloatingModMenuService_Stop(JNIEnv *env, jobject type) {
-        stopClient();
-    }
+extern "C"
+JNIEXPORT void JNICALL
+Java_uk_lgl_modmenu_FloatingModMenuService_Stop(JNIEnv *env, jobject type) {
+    stopClient();
+}
