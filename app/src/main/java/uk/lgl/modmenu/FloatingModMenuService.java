@@ -58,7 +58,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
+import com.topjohnwu.superuser.Shell;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.widget.RelativeLayout.ALIGN_PARENT_LEFT;
@@ -67,13 +67,19 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.content.Context;
 import java.util.ArrayList;
-import eu.chainfire.libsuperuser.Shell;
 import java.io.File;
 import java.util.Iterator;
+import java.util.Locale;
+import com.topjohnwu.superuser.internal.Utils;
 
 public class FloatingModMenuService extends Service {
     //********** Here you can easly change the menu appearance **********//
 
+    //***************** TARGET *********//
+        String LibName = "libLibServer.so";
+    String targetPackage = "fps.zombie.shooting.fun.to.dead";
+    
+    
     //region Variable
     public static final String TAG = "Mod_Menu"; //Tag for logcat
     int TEXT_COLOR = Color.parseColor("#82CAFD");
@@ -469,6 +475,7 @@ public class FloatingModMenuService extends Service {
 
     private void featureList(String[] listFT, LinearLayout linearLayout) {
         //Currently looks messy right now. Let me know if you have improvements
+      linearLayout.removeAllViews();
         int featNum, subFeat = 0;
         LinearLayout llBak = linearLayout;
 
@@ -1022,7 +1029,7 @@ public class FloatingModMenuService extends Service {
             l.removeAllViews();
                 TextView textView = new TextView(this);
                 textView.setBackgroundColor(Color.parseColor("#00000000"));
-                textView.setText("Click On Inject After 'Tap To Continue");
+                textView.setText("First, Try to inject with Root Method, It will work On Virtual Also. \n If Virtual Crashes Try Virtual Method");
                 textView.setGravity(Gravity.CENTER_HORIZONTAL);
                 textView.setTextSize(14.0f);
                 textView.setTextColor(Color.YELLOW);
@@ -1036,14 +1043,21 @@ public class FloatingModMenuService extends Service {
                 button.setLayoutParams(layoutParams);
                 button.setTextColor(TEXT_COLOR_2);
                 button.setAllCaps(false); //Disable caps to support html
-                button.setText(Html.fromHtml("<b>Inject</b>"));
+                button.setText(Html.fromHtml("<b>Inject On Virtual [Vmos ++]</b>"));
                 button.setBackgroundColor(BTN_COLOR);
                 
-
+                final Button button2 = new Button(this);
+               
+                button2.setLayoutParams(layoutParams);
+                button2.setTextColor(TEXT_COLOR_2);
+                button2.setAllCaps(false); //Disable caps to support html
+                button2.setText(Html.fromHtml("<b>Inject On Root [Magisk ++]</b>"));
+                button2.setBackgroundColor(BTN_COLOR);
+                
                 button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                    if (Injector()) {
+                                    if (InjectVirtual(LibName)) {
                                             if (IsConnected()){
                                                     featureList(getFeatureList(), patches);
 
@@ -1052,7 +1066,31 @@ public class FloatingModMenuService extends Service {
 
                                                 } else {
 
+                                                 //   button.setVisibility(View.GONE);
+
+                                                    String[] NotInjected = {"Category_Not Injected"};
+                                                    featureList(NotInjected, patches);
+                                                    Toast.makeText(FloatingModMenuService.this, "Injection Failed!", Toast.LENGTH_LONG).show();
+
+                                                }
+                                        } else {
+                                            button.setEnabled(true);
+                                        }
+                                }
+                        });
+                button2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                    if (InjectRoot(LibName)) {
+                                            if (IsConnected()){
+                                                    featureList(getFeatureList(), patches);
+
+                                                    Toast.makeText(FloatingModMenuService.this, "Injection Success!", Toast.LENGTH_LONG).show();
                                                     button.setVisibility(View.GONE);
+
+                                                } else {
+
+                                                    //button.setVisibility(View.GONE);
 
                                                     String[] NotInjected = {"Category_Not Injected"};
                                                     featureList(NotInjected, patches);
@@ -1066,65 +1104,112 @@ public class FloatingModMenuService extends Service {
                         });
 
                 
+                
                 l.addView(textView);
                 l.addView(button);
+                l.addView(button2);
 
             }
 
-        
-        public int Game(String pkg) {
-                try {
-                        ArrayList arrayList = new ArrayList();
-                        Shell.PoolWrapper poolWrapper = Shell.Pool.SU;
-                        poolWrapper.run("(toolbox ps; toolbox ps -A; toybox ps; toybox ps -A) | grep \" " + pkg + "$\"", arrayList, null, false);
-                        Iterator iterator = arrayList.iterator();
-                        while (iterator.hasNext()) {
-                                String Trim = ((String) iterator.next()).trim();
-                                while (Trim.contains("  ")) {
-                                        Trim = Trim.replace("  ", " ");
+        public static int getProcessID(String pkg) {
+
+                int pid = -1;
+                if (Shell.rootAccess()) {
+                        String cmd = "for p in /proc/[0-9]*; do [[ $(<$p/cmdline) = " + pkg + " ]] && echo ${p##*/}; done";
+                        List<String> outs = new ArrayList<>();
+                        Shell.su(cmd).to(outs).exec();
+                        if (outs.size() > 0) {
+                                pid = Integer.parseInt(outs.get(0));
+                            }
+                    } else {
+                        Shell.Result out = Shell.sh("/system/bin/ps -A | grep \"" + pkg + "\"").exec();
+                        List<String> output = out.getOut();
+                        if (output.isEmpty() || output.get(0).contains("bad pid")) {
+                                out = Shell.sh("/system/bin/ps | grep \"" + pkg + "\"").exec();
+                                output = out.getOut();
+                                if (!output.isEmpty() && !output.get(0).contains("bad pid")) {
+                                        for (int i = 0; i < output.size(); i++) {
+                                                String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
+                                                if (results[8].equals(pkg)) {
+                                                        pid = Integer.parseInt(results[1]);
+                                                    }
+                                            }
                                     }
-                                String[] Split = Trim.split(" ");
-                                if (Split.length >= 2) {
-                                        return Integer.parseInt(Split[1]);
+                            } else {
+                                for (int i = 0; i < output.size(); i++) {
+                                        String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
+                                        for (int j = 0; j < results.length; j++) {
+                                                if (results[j].equals(pkg)) {
+                                                        pid = Integer.parseInt(results[j - 7]);
+                                                    }
+                                            }
                                     }
                             }
-                        return -1;
-                    } catch (Shell.ShellDiedException e) {
-                        e.printStackTrace();
-                        return -1;
                     }
+                return pid;
             }
         
-        private boolean Injector() {
-                boolean[] booleans = {false};
+        private boolean InjectRoot(String Lib) {
                 try {
-                        String injector = getApplicationInfo().nativeLibraryDir + File.separator + "libinject.so";
-                        String payload_source = getApplicationInfo().nativeLibraryDir + File.separator + "libLibServer.so";
-                        //String payload_source = "/storage/emulated/0/"+ Server();
-
-                        String payload_dest = "/data/local/tmp/libLibServer.so";
+                        String target = targetPackage;
+                        String injector = this.getApplicationInfo().nativeLibraryDir + File.separator + "libGlobalInject.so";
+                        String payload_source = this.getApplicationInfo().nativeLibraryDir + File.separator + Lib;
+                        String payload_dest = "/data/local/tmp/"+Lib;
                         String context = "u:object_r:system_lib_file:s0";
                         List<String> STDOUT = new ArrayList<>();
-                        Shell.Pool.SU.run("ls -lZ /system/lib/libandroid_runtime.so", STDOUT, null, false);
+                        Shell.su("ls -lZ /system/lib/libandroid_runtime.so").to(STDOUT).exec();
                         for (String line : STDOUT) {
                                 if (line.contains(" u:object_r:") && line.contains(":s0 ")) {
                                         context = line.substring(line.indexOf("u:object_r:"));
                                         context = context.substring(0, context.indexOf(' '));
                                     }
                             }
-                        Shell.Pool.SU.run(new String[] {"cp " + payload_source + " " + payload_dest, "chmod 777 " + payload_dest});
-                        int game = -1;
-                        while (game < 0) { game = Game("com.noodlecake.altosadventure"); }
-                        if (game < 0) { return Boolean.FALSE; }
-
-                        Shell.Pool.SU.run((Object) String.format("%s %d %s", new Object[]{injector, Integer.valueOf(game), payload_dest}), booleans[0]);
-                        new File(payload_dest).delete();
+                        Shell.su("cp " + payload_source + " " + payload_dest).exec();
+                        Shell.su("chmod 777 " + payload_dest).exec();
+                        Shell.su("chcon " + context + " " + payload_dest).exec();
+                        while (getProcessID(target) <= 0) {}
+                        Thread.sleep(1000);
+                        int pid = getProcessID(target);
+                        String command = String.format(Locale.ENGLISH,"%s %d %s", injector, pid, payload_dest);
+                        Shell.su(command).exec();
+                        Init();
+                        return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                            
+                        return false;
+                    }
+            }
+        private boolean InjectVirtual(String Lib) {
+                try {
+                        String target = targetPackage;
+                        String injector = this.getApplicationInfo().nativeLibraryDir + File.separator + "libVirtualInject.so";
+                        String payload_source = this.getApplicationInfo().nativeLibraryDir + File.separator + Lib;
+                        String payload_dest = "/data/local/tmp/"+Lib;
+                        String context = "u:object_r:system_lib_file:s0";
+                        List<String> STDOUT = new ArrayList<>();
+                        Shell.su("ls -lZ /system/lib/libandroid_runtime.so").to(STDOUT).exec();
+                        for (String line : STDOUT) {
+                                if (line.contains(" u:object_r:") && line.contains(":s0 ")) {
+                                        context = line.substring(line.indexOf("u:object_r:"));
+                                        context = context.substring(0, context.indexOf(' '));
+                                    }
+                            }
+                        Shell.su("cp " + payload_source + " " + payload_dest).exec();
+                        Shell.su("chmod 777 " + payload_dest).exec();
+                        Shell.su("chcon " + context + " " + payload_dest).exec();
+                        while (getProcessID(target) <= 0) {}
+                        Thread.sleep(1000);
+                        int pid = getProcessID(target);
+                        String command = String.format(Locale.ENGLISH,"%s %d %s", injector, pid, payload_dest);
+                        Shell.su(command).exec();
                         Init();
                         return true;
                     } catch (Exception e) {
                         e.printStackTrace();
                         return false;
                     }
+
             }
     //Override our Start Command so the Service doesnt try to recreate itself when the App is closed
     public int onStartCommand(Intent intent, int i, int i2) {
