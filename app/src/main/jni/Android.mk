@@ -2,6 +2,16 @@ LOCAL_PATH := $(call my-dir)
 MAIN_LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := GlobalInject
+LOCAL_SRC_FILES := RootLib/libGlobalInject.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := VirtualInject
+LOCAL_SRC_FILES := RootLib/libVirtualInject.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE    := MyLibName
 # Code optimization
 # -std=c++17 is required to support AIDE app with NDK
@@ -54,7 +64,6 @@ LOCAL_SRC_FILES := Server.cpp \
 LOCAL_LDLIBS := -llog -landroid -lGLESv2
 
 include $(BUILD_SHARED_LIBRARY)
-
 
 
 
