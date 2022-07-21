@@ -71,3 +71,29 @@ You can Receive Sent Data In <code>Server.cpp</code>
 ```
 
 ![img5](https://anopic.us/RcphngTLfeoyH5y4llSBoW7F3sjUcOXavRpgQTEA.jpg)
+
+
+<H4> Making Mods</h4>
+You can Simply Make Mod Like LGL Android Mod Menu 2.9
+<Br>
+
+<H1>Change Log</h1>
+
+```
+*Change Log*
+1. Fixed Injection
+2. No Need To Add Libinject Manually, LibInject Will be Added Automatically
+3. Changed Root Library From Eu.Chainfire To com.topjohnwu.superuser
+4. Fixed For Magisk
+5. Fixed For Root
+6. Fixed For Virtual Androids
+7. made 2 Button To inject
+8. Managed Some Codes
+```
+
+<H3>Credits</h3>
+Making Project: Nepmods (https://GitHub.com/nepmods)<br>
+*Inject Lib Framework : Chainfire/evilsocket : https://github.com/Chainfire/inject-hook-cflumen
+*Mod Template : LGLTeam : https://github.com/LGLTeam/Android-Mod-Menu
+*Socket: Kmods : https://github.com/kp7742
+*Help To Inject Fix On Root/Magisk: Mr Any Gamer
