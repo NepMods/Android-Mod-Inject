@@ -58,3 +58,16 @@ You can Create A New Case That Matches with Feature position, You can Use <br>
 <H4>Receiving data</h4>
 
 You can Receive Sent Data In <code>Server.cpp</code>
+<Br>
+1. Create A New Feature Id With Same Number.
+<Br>
+2. Receive like showen
+
+```
+} else if (request.Mode == f::featureID) {
+     feature2 = request.boolean;
+     response.Success = true;
+
+```
+
+![img5](https://anopic.us/RcphngTLfeoyH5y4llSBoW7F3sjUcOXavRpgQTEA.jpg)
