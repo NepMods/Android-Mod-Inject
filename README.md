@@ -23,3 +23,8 @@ You Need To Target The Game By Entering Game's Package Name On
 >If You Change Lib Name in Android.ml, also Change here
 
 ![image1](https://i.ibb.co/fX3xWqG/Screenshot-20220721-191944.png)
+
+
+<H3> Step 2: Targeting Lib <h3>
+You need to Target A Library For Hacking Or Making Mod, You can do it on <code>Server.cpp</code>
+
