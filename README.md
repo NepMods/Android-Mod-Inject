@@ -46,4 +46,15 @@ YOU CAN ADD NEW FEATURE TO <code>Main.cpp</code>file.
 You need To Create New Feature Id for Sending / Receiving The Data using Socket.
 <Br>For that:
 
-![img4](https://pasteboard.co/gD4k4bLyw9fb.png)
+![img4](https://gcdnb.pbrd.co/images/gD4k4bLyw9fb.png?o=1)
+
+
+<H4>Sending Feature To Server Library</h4>
+You can Create A New Case That Matches with Feature position, You can Use <br>
+<Code>Send(f::featureID, [bool/int])</code>
+
+![IMG](https://anopic.us/DinoyWOBMqjXANKcQuU0yK6mw61m4E3BfprNveWP.jpg)
+
+<H4>Receiving data</h4>
+
+You can Receive Sent Data In <code>Server.cpp</code>
