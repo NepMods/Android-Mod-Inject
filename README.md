@@ -88,7 +88,7 @@ You can Simply Make Mod Like LGL Android Mod Menu 2.9
 5. Fixed For Root
 6. Fixed For Virtual Androids
 7. made 2 Button To inject
-8. Managed Some Codes
+
 ```
 
 <H3>Credits</h3>
