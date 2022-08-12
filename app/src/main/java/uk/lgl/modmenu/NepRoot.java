@@ -16,22 +16,22 @@ import android.app.Activity;
 import uk.lgl.MainActivity;
 
 public class NepRoot extends Activity {
-
-	// public static native int Init();
-
+	
+	public static native int Init();
+	
 	private MainActivity thiz;
-
+	
 	public NepRoot(MainActivity thiz) {
 		this.thiz = thiz;
 	}
-
+	
 	public void showNoRootMessage() {
-		(new AlertDialog.Builder(thiz))
-				.setMessage("Could not acquire root")
-				.setNegativeButton(android.R.string.ok, null)
-				.show();
-	}
-
+        (new AlertDialog.Builder(thiz))
+			.setMessage("Could not acquire root")
+			.setNegativeButton(android.R.string.ok, null)
+			.show();
+    } 
+    
 	public int Game(String pkg) {
 		try {
 			ArrayList arrayList = new ArrayList();

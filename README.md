@@ -89,7 +89,6 @@ You can Simply Make Mod Like LGL Android Mod Menu 2.9
 6. Fixed For Virtual Androids
 7. made 2 Button To inject
 8. Managed Some Codes
-9. Fixed On Higher Android Versions
 ```
 
 <H3>Credits</h3>
@@ -98,5 +97,3 @@ Making Project: Nepmods (https://GitHub.com/nepmods)<br>
 *Mod Template : LGLTeam : https://github.com/LGLTeam/Android-Mod-Menu<br>
 *Socket: Kmods : https://github.com/kp7742<br>
 *Help To Inject Fix On Root/Magisk: Mr Any Gamer<br>
-Fixed In Higher Android: https://github.com/Ioopen
-

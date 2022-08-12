@@ -76,10 +76,10 @@ public class FloatingModMenuService extends Service {
     //********** Here you can easly change the menu appearance **********//
 
     //***************** TARGET *********//
-    String LibName = "libLibServer.so";
-    String targetPackage = "com.pgx.game";
-
-
+        String LibName = "libLibServer.so";
+    String targetPackage = "fps.zombie.shooting.fun.to.dead";
+    
+    
     //region Variable
     public static final String TAG = "Mod_Menu"; //Tag for logcat
     int TEXT_COLOR = Color.parseColor("#82CAFD");
@@ -113,7 +113,7 @@ public class FloatingModMenuService extends Service {
     ImageView startimage;
     FrameLayout rootFrame;
     ScrollView scrollView;
-
+    
     boolean stopChecking;
 
     //initialize methods from the native library
@@ -130,13 +130,13 @@ public class FloatingModMenuService extends Service {
     native String[] settingsList();
 
     native boolean isGameLibLoaded();
-
+   
     static native void DrawOn(NepEsp espView, Canvas canvas);
-
+    
     native boolean IsConnected();
-
+    
     native void Init();
-
+    
     native void Stop();
     //endregion
 
@@ -153,44 +153,44 @@ public class FloatingModMenuService extends Service {
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             public void run() {
-
+                
                 Thread();
                 handler.postDelayed(this, 1000);
             }
         });
     }
-
-    private int getLayoutType() {
-        int LAYOUT_FLAG;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_TOAST;
-        } else {
-            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        }
-        return LAYOUT_FLAG;
-    }
-    private void DrawCanvas() {
-
-
-        WindowManager.LayoutParams layoutParams;
-        this.espParams = layoutParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                this.getLayoutType(),
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                PixelFormat.TRANSLUCENT);
-        layoutParams.gravity = Gravity.TOP | Gravity.START;
-        this.espParams.x = 0;
-        this.espParams.y = 100;
-        this.mWindowManager.addView((View) this.overlayView, (ViewGroup.LayoutParams) this.espParams);
-    }
+    
+        private int getLayoutType() {
+                int LAYOUT_FLAG;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_TOAST;
+                    } else {
+                        LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+                    }
+                return LAYOUT_FLAG;
+            }
+        private void DrawCanvas() {
 
 
+                WindowManager.LayoutParams layoutParams;
+                this.espParams = layoutParams = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    this.getLayoutType(),
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    PixelFormat.TRANSLUCENT);
+                layoutParams.gravity = Gravity.TOP | Gravity.START;
+                this.espParams.x = 0;
+                this.espParams.y = 100;
+                this.mWindowManager.addView((View) this.overlayView, (ViewGroup.LayoutParams) this.espParams);
+            }
+
+        
     //Here we write the code for our Menu
     // Reference: https://www.androidhive.info/2016/11/android-floating-widget-like-facebook-chat-head/
     private void initFloating() {
@@ -417,7 +417,7 @@ public class FloatingModMenuService extends Service {
                 } else {
                     patches.removeAllViews();
                     InjectBtn(patches);
-                    //  featureList(getFeatureList(), patches);
+                  //  featureList(getFeatureList(), patches);
                 }
             }
         }, 500);
@@ -475,7 +475,7 @@ public class FloatingModMenuService extends Service {
 
     private void featureList(String[] listFT, LinearLayout linearLayout) {
         //Currently looks messy right now. Let me know if you have improvements
-        linearLayout.removeAllViews();
+      linearLayout.removeAllViews();
         int featNum, subFeat = 0;
         LinearLayout llBak = linearLayout;
 
@@ -818,7 +818,7 @@ public class FloatingModMenuService extends Service {
                 final TextView TextViewNote = new TextView(getApplicationContext());
                 TextViewNote.setText("Tap OK to apply changes. Tap outside to cancel");
                 if (maxValue != 0)
-                    TextViewNote.setText("Tap OK to apply changes. Tap outside to cancel\nMax value: " + maxValue);
+                TextViewNote.setText("Tap OK to apply changes. Tap outside to cancel\nMax value: " + maxValue);
                 TextViewNote.setTextColor(TEXT_COLOR_2);
 
                 //Edit text
@@ -1025,36 +1025,36 @@ public class FloatingModMenuService extends Service {
         wView.getSettings().setAppCacheEnabled(false);
         return wView;
     }
-    private void InjectBtn(LinearLayout l) {
-        l.removeAllViews();
-        TextView textView = new TextView(this);
-        textView.setBackgroundColor(Color.parseColor("#00000000"));
-        textView.setText("First, Try to inject with Root Method, It will work On Virtual Also. \n If Virtual Crashes Try Virtual Method");
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);
-        textView.setTextSize(14.0f);
-        textView.setTextColor(Color.YELLOW);
-        textView.setTypeface(null, Typeface.BOLD);
-        textView.setPadding(10, 5, 0, 5);
+        private void InjectBtn(LinearLayout l) {
+            l.removeAllViews();
+                TextView textView = new TextView(this);
+                textView.setBackgroundColor(Color.parseColor("#00000000"));
+                textView.setText("First, Try to inject with Root Method, It will work On Virtual Also. \n If Virtual Crashes Try Virtual Method");
+                textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                textView.setTextSize(14.0f);
+                textView.setTextColor(Color.YELLOW);
+                textView.setTypeface(null, Typeface.BOLD);
+                textView.setPadding(10, 5, 0, 5);
 
-
-        final Button button = new Button(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-        layoutParams.setMargins(7, 5, 7, 5);
-        button.setLayoutParams(layoutParams);
-        button.setTextColor(TEXT_COLOR_2);
-        button.setAllCaps(false); //Disable caps to support html
-        button.setText(Html.fromHtml("<b>Inject On Virtual [Vmos ++]</b>"));
-        button.setBackgroundColor(BTN_COLOR);
-
-        final Button button2 = new Button(this);
-
-        button2.setLayoutParams(layoutParams);
-        button2.setTextColor(TEXT_COLOR_2);
-        button2.setAllCaps(false); //Disable caps to support html
-        button2.setText(Html.fromHtml("<b>Inject On Root [Magisk ++]</b>"));
-        button2.setBackgroundColor(BTN_COLOR);
-
-             /*   button.setOnClickListener(new View.OnClickListener() {
+               
+                final Button button = new Button(this);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+                layoutParams.setMargins(7, 5, 7, 5);
+                button.setLayoutParams(layoutParams);
+                button.setTextColor(TEXT_COLOR_2);
+                button.setAllCaps(false); //Disable caps to support html
+                button.setText(Html.fromHtml("<b>Inject On Virtual [Vmos ++]</b>"));
+                button.setBackgroundColor(BTN_COLOR);
+                
+                final Button button2 = new Button(this);
+               
+                button2.setLayoutParams(layoutParams);
+                button2.setTextColor(TEXT_COLOR_2);
+                button2.setAllCaps(false); //Disable caps to support html
+                button2.setText(Html.fromHtml("<b>Inject On Root [Magisk ++]</b>"));
+                button2.setBackgroundColor(BTN_COLOR);
+                
+                button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                     if (InjectVirtual(LibName)) {
@@ -1077,110 +1077,110 @@ public class FloatingModMenuService extends Service {
                                             button.setEnabled(true);
                                         }
                                 }
-                        });*/
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (InjectRoot(LibName)) {
-                    if (IsConnected()){
-                        featureList(getFeatureList(), patches);
+                        });
+                button2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                    if (InjectRoot(LibName)) {
+                                            if (IsConnected()){
+                                                    featureList(getFeatureList(), patches);
 
-                        Toast.makeText(FloatingModMenuService.this, "Injection Success!", Toast.LENGTH_LONG).show();
-                        button.setVisibility(View.GONE);
+                                                    Toast.makeText(FloatingModMenuService.this, "Injection Success!", Toast.LENGTH_LONG).show();
+                                                    button.setVisibility(View.GONE);
 
+                                                } else {
+
+                                                    //button.setVisibility(View.GONE);
+
+                                                    String[] NotInjected = {"Category_Not Injected"};
+                                                    featureList(NotInjected, patches);
+                                                    Toast.makeText(FloatingModMenuService.this, "Injection Failed!", Toast.LENGTH_LONG).show();
+
+                                                }
+                                        } else {
+                                            button.setEnabled(true);
+                                        }
+                                }
+                        });
+
+                
+                
+                l.addView(textView);
+                l.addView(button);
+                l.addView(button2);
+
+            }
+
+        public static int getProcessID(String pkg) {
+
+                int pid = -1;
+                if (Shell.rootAccess()) {
+                        String cmd = "for p in /proc/[0-9]*; do [[ $(<$p/cmdline) = " + pkg + " ]] && echo ${p##*/}; done";
+                        List<String> outs = new ArrayList<>();
+                        Shell.su(cmd).to(outs).exec();
+                        if (outs.size() > 0) {
+                                pid = Integer.parseInt(outs.get(0));
+                            }
                     } else {
-
-                        //button.setVisibility(View.GONE);
-
-                        String[] NotInjected = {"Category_Not Injected"};
-                        featureList(NotInjected, patches);
-                        Toast.makeText(FloatingModMenuService.this, "Injection Failed!", Toast.LENGTH_LONG).show();
-
+                        Shell.Result out = Shell.sh("/system/bin/ps -A | grep \"" + pkg + "\"").exec();
+                        List<String> output = out.getOut();
+                        if (output.isEmpty() || output.get(0).contains("bad pid")) {
+                                out = Shell.sh("/system/bin/ps | grep \"" + pkg + "\"").exec();
+                                output = out.getOut();
+                                if (!output.isEmpty() && !output.get(0).contains("bad pid")) {
+                                        for (int i = 0; i < output.size(); i++) {
+                                                String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
+                                                if (results[8].equals(pkg)) {
+                                                        pid = Integer.parseInt(results[1]);
+                                                    }
+                                            }
+                                    }
+                            } else {
+                                for (int i = 0; i < output.size(); i++) {
+                                        String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
+                                        for (int j = 0; j < results.length; j++) {
+                                                if (results[j].equals(pkg)) {
+                                                        pid = Integer.parseInt(results[j - 7]);
+                                                    }
+                                            }
+                                    }
+                            }
                     }
-                } else {
-                    button.setEnabled(true);
-                }
+                return pid;
             }
-        });
-
-
-
-        l.addView(textView);
-        l.addView(button);
-        l.addView(button2);
-
-    }
-
-    public static int getProcessID(String pkg) {
-
-        int pid = -1;
-        if (Shell.rootAccess()) {
-            String cmd = "for p in /proc/[0-9]*; do [[ $(<$p/cmdline) = " + pkg + " ]] && echo ${p##*/}; done";
-            List<String> outs = new ArrayList<>();
-            Shell.su(cmd).to(outs).exec();
-            if (outs.size() > 0) {
-                pid = Integer.parseInt(outs.get(0));
-            }
-        } else {
-            Shell.Result out = Shell.sh("/system/bin/ps -A | grep \"" + pkg + "\"").exec();
-            List<String> output = out.getOut();
-            if (output.isEmpty() || output.get(0).contains("bad pid")) {
-                out = Shell.sh("/system/bin/ps | grep \"" + pkg + "\"").exec();
-                output = out.getOut();
-                if (!output.isEmpty() && !output.get(0).contains("bad pid")) {
-                    for (int i = 0; i < output.size(); i++) {
-                        String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
-                        if (results[8].equals(pkg)) {
-                            pid = Integer.parseInt(results[1]);
-                        }
+        
+        private boolean InjectRoot(String Lib) {
+                try {
+                        String target = targetPackage;
+                        String injector = this.getApplicationInfo().nativeLibraryDir + File.separator + "libGlobalInject.so";
+                        String payload_source = this.getApplicationInfo().nativeLibraryDir + File.separator + Lib;
+                        String payload_dest = "/data/local/tmp/"+Lib;
+                        String context = "u:object_r:system_lib_file:s0";
+                        List<String> STDOUT = new ArrayList<>();
+                        Shell.su("ls -lZ /system/lib/libandroid_runtime.so").to(STDOUT).exec();
+                        for (String line : STDOUT) {
+                                if (line.contains(" u:object_r:") && line.contains(":s0 ")) {
+                                        context = line.substring(line.indexOf("u:object_r:"));
+                                        context = context.substring(0, context.indexOf(' '));
+                                    }
+                            }
+                        Shell.su("cp " + payload_source + " " + payload_dest).exec();
+                        Shell.su("chmod 777 " + payload_dest).exec();
+                        Shell.su("chcon " + context + " " + payload_dest).exec();
+                        while (getProcessID(target) <= 0) {}
+                        Thread.sleep(1000);
+                        int pid = getProcessID(target);
+                        String command = String.format(Locale.ENGLISH,"%s %d %s", injector, pid, payload_dest);
+                        Shell.su(command).exec();
+                        Init();
+                        return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                            
+                        return false;
                     }
-                }
-            } else {
-                for (int i = 0; i < output.size(); i++) {
-                    String[] results = output.get(i).trim().replaceAll("( )+", ",").replaceAll("(\n)+", ",").split(",");
-                    for (int j = 0; j < results.length; j++) {
-                        if (results[j].equals(pkg)) {
-                            pid = Integer.parseInt(results[j - 7]);
-                        }
-                    }
-                }
             }
-        }
-        return pid;
-    }
-
-    private boolean InjectRoot(String Lib) {
-        try {
-            String target = targetPackage;
-            String injector = this.getApplicationInfo().nativeLibraryDir + File.separator + "libGlobalInject.so";
-            String payload_source = this.getApplicationInfo().nativeLibraryDir + File.separator + Lib;
-            String payload_dest = "/data/local/tmp/"+Lib;
-            String context = "u:object_r:system_lib_file:s0";
-            List<String> STDOUT = new ArrayList<>();
-            Shell.su("ls -lZ /system/lib/libandroid_runtime.so").to(STDOUT).exec();
-            for (String line : STDOUT) {
-                if (line.contains(" u:object_r:") && line.contains(":s0 ")) {
-                    context = line.substring(line.indexOf("u:object_r:"));
-                    context = context.substring(0, context.indexOf(' '));
-                }
-            }
-            Shell.su("cp " + payload_source + " " + payload_dest).exec();
-            Shell.su("su -c chmod 777 " + payload_dest).exec();
-            Shell.su("chcon " + context + " " + payload_dest).exec();
-            while (getProcessID(target) <= 0) {}
-            Thread.sleep(1000);
-            int pid = getProcessID(target);
-            String command = String.format(Locale.ENGLISH,"%s %d %s", injector, pid, payload_dest);
-            Shell.su(command).exec();
-            Init();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return false;
-        }
-    }
-    /*    private boolean InjectVirtual(String Lib) {
+        private boolean InjectVirtual(String Lib) {
                 try {
                         String target = targetPackage;
                         String injector = this.getApplicationInfo().nativeLibraryDir + File.separator + "libVirtualInject.so";
@@ -1210,7 +1210,7 @@ public class FloatingModMenuService extends Service {
                         return false;
                     }
 
-            }*/
+            }
     //Override our Start Command so the Service doesnt try to recreate itself when the App is closed
     public int onStartCommand(Intent intent, int i, int i2) {
         return Service.START_NOT_STICKY;

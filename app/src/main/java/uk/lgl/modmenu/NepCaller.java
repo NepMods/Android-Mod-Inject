@@ -11,7 +11,7 @@ public class NepCaller extends Application {
     public void onCreate() {
         super.onCreate();
         try {
-            Runtime.getRuntime().exec("su -c");
+            Runtime.getRuntime().exec("su");
             Shell.SU.run("setenforce 0");
         } catch (IOException e) {
             e.printStackTrace();
