@@ -97,3 +97,5 @@ Making Project: Nepmods (https://GitHub.com/nepmods)<br>
 *Mod Template : LGLTeam : https://github.com/LGLTeam/Android-Mod-Menu<br>
 *Socket: Kmods : https://github.com/kp7742<br>
 *Help To Inject Fix On Root/Magisk: Mr Any Gamer<br>
+Fixed In Higher Android: https://github.com/Ioopen
+
